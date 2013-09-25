@@ -4,15 +4,14 @@
  */
 package com.analyzer;
 
-import com.classes.Carro;
-import com.classes.Cliente;
-import com.classes.Livro;
-import com.classes.PacienteTESTE;
-import com.classes.Pessoa;
+import com.annotations.Column;
+import com.classes.CarroTeste;
+import com.classes.ClienteTeste;
+import com.classes.PacienteTeste;
+import com.classes.PessoaTeste;
 import com.exceptions.AnalyzeException;
 import java.lang.reflect.Method;
 import java.util.Map;
-import javax.persistence.Column;
 import static junit.framework.Assert.assertEquals;
 import junit.framework.TestCase;
 
@@ -22,17 +21,17 @@ import junit.framework.TestCase;
  */
 public class AnalyzerClassTest extends TestCase {
 
-    private Carro car;
+    private CarroTeste car;
 
     public AnalyzerClassTest(String testName) {
         super(testName);
-        this.car = new Carro(1, "maaa", "mooo");
+        this.car = new CarroTeste(1, "maaa", "mooo");
     }
 
     public void testRetornaAnotacaoDaClasse() {
         String ann = AnalyzerClass.getClassAnnotation(car);
         this.assertEquals("CARRO", ann);
-        ann = AnalyzerClass.getClassAnnotation(Carro.class);
+        ann = AnalyzerClass.getClassAnnotation(CarroTeste.class);
         this.assertEquals("CARRO", ann);
     }
 
@@ -59,21 +58,21 @@ public class AnalyzerClassTest extends TestCase {
     
     public void testChamarMetodoPorReflectionSuperClasse() throws AnalyzeException {
         Integer id = 10;
-        Cliente cliente = new Cliente(id, "abc", "123", "123456");
+        ClienteTeste cliente = new ClienteTeste(id, "abc", "123", "123456");
         Integer chamada = (Integer) AnalyzerClass.callMethodGet(cliente, "id");
         this.assertEquals(id, chamada);
     }
     
     public void testPossuiMapParaAtributoId() throws AnalyzeException {
         String id = "id";
-        Map<String, Column> maps = AnalyzerClass.getMapId(Carro.class);
+        Map<String, Column> maps = AnalyzerClass.getMapId(CarroTeste.class);
         this.assertTrue(maps.containsKey(id));
         this.assertEquals("ID_CARRO", maps.get(id).name());
     }
     
     public void testChamarGetIdRelacionamento() throws AnalyzeException{
         Integer id = 10;
-        Pessoa pessoa = new Pessoa(id, "Pessoa", "1234");
+        PessoaTeste pessoa = new PessoaTeste(id, "Pessoa", "1234");
         car.setPessoa(pessoa);
         Integer newId = (Integer) AnalyzerClass.callMethodGetIdFrom(car, "pessoa");
         assertEquals(id, newId);
@@ -81,7 +80,7 @@ public class AnalyzerClassTest extends TestCase {
     
     public void testGetIdRelacionamento() throws AnalyzeException{
         Integer id = 10;
-        Pessoa pessoa = new Pessoa(id, "Pessoa", "1234");
+        PessoaTeste pessoa = new PessoaTeste(id, "Pessoa", "1234");
         car.setPessoa(pessoa);
         Integer newId = (Integer) AnalyzerClass.callMethodGetIdFrom(car, "pessoa");
         assertEquals(id, newId);
@@ -98,22 +97,22 @@ public class AnalyzerClassTest extends TestCase {
     }
     
     public void testPegarAtributosDaSuperClasseComMapeamento(){
-        assertEquals(4, AnalyzerClass.getMapAttributesWithAnnotation(Cliente.class).size());
+        assertEquals(4, AnalyzerClass.getMapAttributesWithAnnotation(ClienteTeste.class).size());
     }
     
     public void testPegarAtributosDaSuperClasseSemMapeamento(){
-        assertEquals(7, AnalyzerClass.getMapAttributesWithAnnotation(PacienteTESTE.class).size());
+        assertEquals(7, AnalyzerClass.getMapAttributesWithAnnotation(PacienteTeste.class).size());
     }
     
     public void testRetornaNomeDaClasseSemPackage(){
-        String classe = "Carro";
-        assertEquals(classe, AnalyzerClass.getSimpleClassName(Carro.class));
+        String classe = "CarroTeste";
+        assertEquals(classe, AnalyzerClass.getSimpleClassName(CarroTeste.class));
     }
     
     public void testPegarMapDosAtributosDaClasseRelacionadaPeloAtributo() throws AnalyzeException{
-        Pessoa pessoa = new Pessoa(10, "Pessoa", "1234");
+        PessoaTeste pessoa = new PessoaTeste(10, "Pessoa", "1234");
         car.setPessoa(pessoa);
-        Map<String, Column> attrs = AnalyzerClass.getMapAttributesFromFieldClass(Carro.class, "pessoa");
+        Map<String, Column> attrs = AnalyzerClass.getMapAttributesFromFieldClass(CarroTeste.class, "pessoa");
         assertEquals(3, attrs.size());
         assertTrue(attrs.containsKey("nome"));
         assertTrue(attrs.containsKey("cpf"));

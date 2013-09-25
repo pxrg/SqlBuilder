@@ -4,9 +4,9 @@
  */
 package com.dbtypes;
 
+import com.annotations.Column;
 import java.util.HashMap;
 import java.util.Map;
-import javax.persistence.Column;
 
 /**
  *

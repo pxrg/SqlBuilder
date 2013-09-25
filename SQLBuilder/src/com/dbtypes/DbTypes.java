@@ -4,7 +4,8 @@
  */
 package com.dbtypes;
 
-import javax.persistence.Column;
+import com.annotations.Column;
+
 
 /**
  *

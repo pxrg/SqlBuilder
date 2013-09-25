@@ -4,7 +4,7 @@
  */
 package com.factory.classes;
 
-import com.classes.Carro;
+import com.classes.CarroTeste;
 import com.exceptions.ClassBuilderException;
 import junit.framework.TestCase;
 
@@ -14,15 +14,15 @@ import junit.framework.TestCase;
  */
 public class ClassBuilderTest extends TestCase {
     
-    Carro car;
+    CarroTeste car;
     
     public ClassBuilderTest(String testName) {
         super(testName);
-        car = new Carro(1, "maaa", "mooo");
+        car = new CarroTeste(1, "maaa", "mooo");
     }
 
     public void testRetornaMesmaInstancia() throws ClassBuilderException{
-        Carro novo = ClassBuilder.getInstance(Carro.class);
+        CarroTeste novo = ClassBuilder.getInstance(CarroTeste.class);
         this.assertNotNull(novo);
     }
     

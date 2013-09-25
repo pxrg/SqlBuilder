@@ -4,8 +4,8 @@
  */
 package com.builder.sql;
 
+import com.annotations.Column;
 import java.util.Map;
-import javax.persistence.Column;
 
 /**
  *

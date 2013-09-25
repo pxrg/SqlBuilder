@@ -4,18 +4,10 @@
  */
 package com.reflection;
 
-import com.builder.sql.SqlBuilder;
-import com.classes.Carro;
-import com.classes.Pessoa;
-import com.classes.Usuario;
 import com.exceptions.AnalyzeException;
 import com.exceptions.SqlBuilderException;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  *
@@ -28,12 +20,12 @@ public class Main {
      */
     public static void main(String[] args) throws AnalyzeException, SQLException, SqlBuilderException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
-        Pessoa fulano = new Pessoa(20, "Ciclano", "11111111111");
-        Pessoa jao = new Pessoa(3, "Jao j", "999999999");
-        Carro gol = new Carro(1, "Volkswagem", "G5 2011");
-        gol.setPessoa(fulano);
-        SqlBuilder.setDataBaseName("DIAG");
-        SqlBuilder.setDataBaseType("postgres");
+//        Pessoa fulano = new Pessoa(20, "Ciclano", "11111111111");
+//        Pessoa jao = new Pessoa(3, "Jao j", "999999999");
+//        Carro gol = new Carro(1, "Volkswagem", "G5 2011");
+//        gol.setPessoa(fulano);
+//        SqlBuilder.setDataBaseName("DIAG");
+//        SqlBuilder.setDataBaseType("postgres");
 //        Object obj = gol.getClass().getDeclaredMethod("getId", null).invoke(gol, null);
 //        System.out.println(obj);
 //        System.out.println(Carro.class.getCanonicalName());
@@ -50,16 +42,16 @@ public class Main {
 //        }
 
 //        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "admin");
-        SqlBuilder.setDataBaseName("TEST");
-        SqlBuilder.setDataBaseType("postgres");
-        SqlBuilder buildPessoa = new SqlBuilder(Pessoa.class);
-        SqlBuilder buildCarro = new SqlBuilder(Carro.class);
-        PreparedStatement statement = null;
-        ResultSet result = null;
-
-        SqlBuilder buildUser = new SqlBuilder(Usuario.class);
-        Usuario user = new Usuario(1, "user", new Date());
-        buildUser.insert(user);
+//        SqlBuilder.setDataBaseName("TEST");
+//        SqlBuilder.setDataBaseType("postgres");
+//        SqlBuilder buildPessoa = new SqlBuilder(Pessoa.class);
+//        SqlBuilder buildCarro = new SqlBuilder(Carro.class);
+//        PreparedStatement statement = null;
+//        ResultSet result = null;
+//
+//        SqlBuilder buildUser = new SqlBuilder(Usuario.class);
+//        Usuario user = new Usuario(1, "user", new Date());
+//        buildUser.insert(user);
 
 //         //Criar tabela
 //        String createPessoa = buildPessoa.createTable();

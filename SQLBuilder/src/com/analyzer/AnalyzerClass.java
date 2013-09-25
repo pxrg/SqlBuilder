@@ -1,6 +1,13 @@
 package com.analyzer;
 
+import com.annotations.Column;
 import com.annotations.CustomColumn;
+import com.annotations.GeneratedValue;
+import com.annotations.GenerationType;
+import com.annotations.Id;
+import com.annotations.JoinColumn;
+import com.annotations.ManyToOne;
+import com.annotations.Table;
 import com.exceptions.AnalyzeException;
 import com.util.StringUtils;
 import java.lang.reflect.Field;
@@ -11,13 +18,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  * Classe apenas com metodos estaticos encarregada por filtrar e armazenar as

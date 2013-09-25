@@ -7,9 +7,9 @@ package com.builder.sql;
 import com.builder.condition.Condition;
 import com.builder.condition.Conditions;
 import com.builder.condition.Order;
-import com.classes.Carro;
-import com.classes.OutroCarro;
-import com.classes.Pessoa;
+import com.classes.CarroTeste;
+import com.classes.OutroCarroTeste;
+import com.classes.PessoaTeste;
 import com.exceptions.AnalyzeException;
 import com.exceptions.SqlBuilderException;
 import org.junit.Test;
@@ -22,14 +22,14 @@ import static org.junit.Assert.*;
 public class SqlBuilderMySqlTest {
 
     SqlBuilder sql;
-    Carro car;
+    CarroTeste car;
 
     public SqlBuilderMySqlTest() throws SqlBuilderException {
         SqlBuilder.setDataBaseName("TESTE");
         SqlBuilder.setDataBaseType("mysql");
-        car = new Carro(1, "maaa", "mooo");
+        car = new CarroTeste(1, "maaa", "mooo");
         try {
-            sql = new SqlBuilder(Carro.class);
+            sql = new SqlBuilder(CarroTeste.class);
         } catch (Exception ex) {
             throw new SqlBuilderException(ex.getMessage());
         }
@@ -104,8 +104,8 @@ public class SqlBuilderMySqlTest {
     @Test
     public void testMySqlRetornaScriptInsertIdNaoAutoIncrement() throws SqlBuilderException {
         try {
-            SqlBuilder build = new SqlBuilder(OutroCarro.class);
-            OutroCarro carro = new OutroCarro(10, "oooo", "aaaa");
+            SqlBuilder build = new SqlBuilder(OutroCarroTeste.class);
+            OutroCarroTeste carro = new OutroCarroTeste(10, "oooo", "aaaa");
             String script = "INSERT INTO CARRO(ID_CARRO,ID_PESSOA,MARCA,MODELO)"
                     + " VALUES( ?, ?, ?, ?)";
             build.insert(carro);
@@ -118,7 +118,7 @@ public class SqlBuilderMySqlTest {
 
     @Test(expected = SqlBuilderException.class)
     public void testRetornaExceptionAtributoNullableFalse() throws SqlBuilderException, AnalyzeException {
-        Carro carro = new Carro();
+        CarroTeste carro = new CarroTeste();
         sql.insert(carro);
     }
 
@@ -181,7 +181,7 @@ public class SqlBuilderMySqlTest {
     public void testRetornaSqlComTabelasRelacionais() throws SqlBuilderException {
         String query = "SELECT CARRO.ID_CARRO FROM CARRO, PESSOA  WHERE "
                 + "CARRO.ID_PESSOA = PESSOA.ID_PESSOA AND PESSOA.NOME = ?";
-        Pessoa pessoa = new Pessoa(10, "Pessoa", "1234");
+        PessoaTeste pessoa = new PessoaTeste(10, "Pessoa", "1234");
         car.setPessoa(pessoa);
         sql.select(new String[]{"id"}).createAlias("pessoa", "pss");
         sql.add(Conditions.equal("pss.nome", ""));

@@ -5,8 +5,6 @@
 package com.annotations;
 
 import java.lang.annotation.Annotation;
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
 
 /**
  * Classe criada para permitir a edicao das informacoes da 
